@@ -6,6 +6,8 @@ if [ -z "$IS_GREEN" ]; then
 
   echo "### BLUE => GREEN ###"
 
+  sudo rm -rf /var/www/fe_green
+
   sudo cp -r /home/ubuntu/fe /var/www/fe_green
 
   sudo cp /etc/nginx/conf.d/fe-route-green /etc/nginx/conf.d/fe-route.inc
@@ -14,6 +16,8 @@ if [ -z "$IS_GREEN" ]; then
 
 else
   echo "### GREEN => BLUE ###"
+
+    sudo rm -rf /var/www/fe_blue
 
     sudo cp -r /home/ubuntu/fe /var/www/fe_blue
 
