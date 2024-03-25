@@ -32,3 +32,25 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         source: "build"
         target: "/var/www/fe/"
+
+    - name: Send fe_deploy.sh
+      uses: appleboy/scp-action@master
+      with:
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USERNAME }}
+        port: 22
+        source: "./fe_deploy.sh"
+        target: "/home/ubuntu/"
+
+    ## deploy fe simply (without docker container)
+    - name: change fe
+      uses: appleboy/ssh-action@master
+      with:
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USERNAME }}
+        port: 22
+        script: |
+          chmod 777 ./fe_deploy.sh
+          ./fe_deploy.sh
