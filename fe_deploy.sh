@@ -8,7 +8,7 @@ if [ -z $IS_GREEN  ];then # blue라면
 
   sudo cp -r /home/ubuntu/fe /var/www/fe_green
 
-  cp /etc/nginx/conf.d/fe-route-green /etc/nginx/conf.d/fe-route.inc
+  sudo cp /etc/nginx/conf.d/fe-route-green /etc/nginx/conf.d/fe-route.inc
 
   sudo nginx -s reload
 
@@ -17,7 +17,7 @@ else
 
     sudo cp -r /home/ubuntu/fe /var/www/fe_green
 
-    cp /etc/nginx/conf.d/fe-route-blue /etc/nginx/conf.d/fe-route.inc
+    sudo cp /etc/nginx/conf.d/fe-route-blue /etc/nginx/conf.d/fe-route.inc
 
     sudo nginx -s reload
 fi
