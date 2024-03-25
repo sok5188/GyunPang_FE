@@ -6,12 +6,16 @@ if [ -z $IS_GREEN  ];then # blue라면
 
   echo "### BLUE => GREEN ###"
 
+  cp -r /var/www/fe /var/www/fe_green
+
   cp /etc/nginx/conf.d/fe-route-green /etc/nginx/conf.d/fe-route.inc
 
   sudo nginx -s reload
 
 else
   echo "### GREEN => BLUE ###"
+
+    cp -r /var/www/fe /var/www/fe_green
 
     cp /etc/nginx/conf.d/fe-route-blue /etc/nginx/conf.d/fe-route.inc
 
