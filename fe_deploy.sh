@@ -1,8 +1,8 @@
 #!/bin/bash
 
-IS_GREEN=$(cat /etc/nginx/conf.d/fe-route.inc | grep green) # 현재 실행중인 App이 blue인지 확인합니다.
+IS_GREEN=$(cat /etc/nginx/conf.d/fe-route.inc | grep green)
 
-if [ -z $IS_GREEN  ];then # blue라면
+if [ -z "$IS_GREEN" ]; then
 
   echo "### BLUE => GREEN ###"
 
@@ -15,7 +15,7 @@ if [ -z $IS_GREEN  ];then # blue라면
 else
   echo "### GREEN => BLUE ###"
 
-    sudo cp -r /home/ubuntu/fe /var/www/fe_green
+    sudo cp -r /home/ubuntu/fe /var/www/fe_blue
 
     sudo cp /etc/nginx/conf.d/fe-route-blue /etc/nginx/conf.d/fe-route.inc
 
