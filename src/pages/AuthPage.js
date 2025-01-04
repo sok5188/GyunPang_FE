@@ -1,20 +1,23 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import './AuthPage.css';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 function AuthPage() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // 로그인 처리 로직 추가 (예: API 호출 등)
-    console.log('로그인 시도:', { username, password });
+    console.log("로그인 시도:", { username, password });
   };
 
   return (
-    <div className="login-container">
-      <div className="login-box">
+    <div className="container">
+      <Helmet>
+        <title>로그인</title> {/* 여기서 브라우저 탭의 제목을 수정 */}
+      </Helmet>
+      <div className="box">
         <h2>로그인</h2>
         <form onSubmit={handleSubmit}>
           <div className="input-group">
@@ -37,7 +40,7 @@ function AuthPage() {
               placeholder="비밀번호를 입력하세요"
             />
           </div>
-          <button type="submit" className="login-btn">
+          <button type="submit" className="btn">
             로그인
           </button>
         </form>

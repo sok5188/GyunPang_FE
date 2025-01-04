@@ -1,0 +1,207 @@
+/* 공통 스타일 */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+
+.box {
+  background-color: white;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.label {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 5px;
+  margin-right: 10px;
+  display: block;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%; /* input과 button이 부모 컨테이너를 전부 차지 */
+}
+
+.input-group label {
+  font-size: 14px;
+  color: #333;
+  margin-right: 10px; /* label과 input 사이에 간격 추가 */
+  white-space: nowrap; /* label 내용이 길어져도 줄바꿈하지 않도록 설정 */
+  margin-bottom: 8px; /* label과 input 사이에 간격 추가 */
+  width: 120px; /* label이 전체 너비를 차지하도록 설정 */
+}
+
+.input-group input {
+  width: 100%; /* input 너비를 100%로 설정하여 label을 제외한 공간을 채움 */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-right: 10px;
+  flex-grow: 1;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4caf50;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.back-btn {
+  background: #f0f0f0; /* 버튼 배경색 설정 (연한 회색) */
+  border: none;
+  font-size: 18px;
+  color: #007bff; /* 텍스트 색상 */
+  cursor: pointer;
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* 동그란 버튼 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  transition: background 0.3s, box-shadow 0.3s; /* 배경색과 그림자 효과에 대한 전환 추가 */
+}
+
+/* 뒤로 가기 버튼 호버 효과 */
+.back-btn:hover {
+  background: #e0e0e0; /* 호버 시 배경색 변경 (좀 더 어두운 회색) */
+  color: #0056b3; /* 호버 시 텍스트 색상 변경 */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 확대 */
+}
+
+.back-btn:active {
+  background: #d0d0d0; /* 클릭 시 배경색 어두운 회색 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 클릭 시 그림자 유지 */
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: #4caf50;
+  font-size: 14px;
+  cursor: pointer;
+  margin: 5px 0;
+}
+
+button:hover {
+  background-color: #cadacb;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.error-text {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.timer {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #d9534f;
+}
+
+.role-select {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px 0;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #f39c12;
+  text-decoration: underline;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+}
+
+header .logo {
+  font-size: 28px;
+  font-weight: 700;
+  font-family: "Poppins", sans-serif;
+  text-decoration: none;
+  color: #fff;
+}
+
+header nav ul li {
+  margin: 0 15px;
+}
+
+header nav {
+  font-size: 18px;
+}
+
+header nav ul {
+  display: flex;
+  list-style: none;
+}
+
+.header {
+  display: flex;
+  justify-content: center; /* 타이틀을 중앙에 위치시킴 */
+  align-items: center; /* 세로 중앙 정렬 */
+  position: relative; /* 뒤로 가기 버튼을 절대 위치로 배치할 수 있게 함 */
+  padding: 10px 20px;
+}
+
+.links {
+  display: flex; /* flexbox 사용 */
+  justify-content: center; /* 요소들 사이에 간격을 일정하게 배분 */
+  align-items: center; /* 세로 중앙 정렬 */
+}
+
+.success-text {
+  color: green;
+  font-size: 16px;
+  margin-top: 15px;
+}

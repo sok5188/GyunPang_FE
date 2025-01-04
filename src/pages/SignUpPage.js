@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import axios from 'axios';
-import './AuthPage.css'; // 기존 스타일을 그대로 사용
 
 function SignupPage() {
     const navigate = useNavigate();
@@ -118,11 +117,11 @@ function SignupPage() {
   }, [timer, timerRunning]);
 
   return (
-      <div className="auth-container">
+      <div className="container">
         <Helmet>
             <title>회원가입</title>  {/* 여기서 브라우저 탭의 제목을 수정 */}
         </Helmet>
-      <div className="auth-box">
+      <div className="box">
         <div className="header">
           <button className="back-btn" onClick={() => navigate(-1)}>←</button>
           <h2>회원가입</h2>
@@ -143,7 +142,6 @@ function SignupPage() {
                 type="button"
                 onClick={checkUsernameAvailability}
                 disabled={!formData.username}
-                className="check-username-btn"
               >
                중복 확인
               </button>
@@ -190,7 +188,6 @@ function SignupPage() {
                 type="button"
                 onClick={handleEmailVerification}
                 disabled={!formData.email}
-                className="verify-email-btn"
               >
                 인증하기
               </button>
@@ -212,7 +209,6 @@ function SignupPage() {
                 <button
                   type="button"
                   onClick={verifyEmailCode}
-                  className="verify-email-btn"
                 >
                   인증 코드 확인
                 </button>
@@ -279,7 +275,7 @@ function SignupPage() {
             </div>
           </div>
 
-          <button type="submit" className="auth-btn">회원가입</button>
+          <button type="submit" className="btn">회원가입</button>
         </form>
       </div>
     </div>
