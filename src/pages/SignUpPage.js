@@ -57,7 +57,7 @@ function SignupPage() {
       const response = await axios.get(
         `open/auth/sendEmailCode?email=${formData.email}`
       );
-      if (response.status == 200) {
+      if (response.status === 200) {
         alert("인증 코드가 이메일로 전송되었습니다.");
         setEmailVerifyCode(response.data.code);
         setTimer(300); // 타이머 시작 (5분 = 300초)
@@ -71,7 +71,7 @@ function SignupPage() {
   };
 
   const verifyEmailCode = async () => {
-    if (emailVerifyCode.length == 0 || emailVerifyCode != verificationCode) {
+    if (emailVerifyCode.length === 0 || emailVerifyCode !== verificationCode) {
       alert("인증 코드가 일치하지 않습니다.");
       setIsEmailVerified(false);
     } else {
@@ -87,7 +87,7 @@ function SignupPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (formData.password != confirmPassword) {
+    if (formData.password !== confirmPassword) {
       alert("비밀번호가 일치하지 않습니다.");
       return;
     }
@@ -109,7 +109,7 @@ function SignupPage() {
         },
       });
 
-      if (response.status == 200) {
+      if (response.status === 200) {
         alert("회원가입이 완료되었습니다.");
         navigate("/auth");
       } else {
@@ -127,7 +127,7 @@ function SignupPage() {
       timeout = setTimeout(() => {
         setTimer((prevTimer) => prevTimer - 1);
       }, 1000);
-    } else if (timer == 0) {
+    } else if (timer === 0) {
       setTimerRunning(false);
     }
 
@@ -297,7 +297,7 @@ function SignupPage() {
 
           {formData.password &&
             confirmPassword &&
-            (formData.password == confirmPassword ? (
+            (formData.password === confirmPassword ? (
               <p className="success-text">비밀번호가 일치합니다.</p>
             ) : (
               <p className="error-text">비밀번호를 확인해주세요.</p>
@@ -311,7 +311,7 @@ function SignupPage() {
                 id="buyer"
                 name="role"
                 value="buyer"
-                checked={formData.role == "buyer"}
+                checked={formData.role === "buyer"}
                 onChange={handleInputChange}
               />
               <label htmlFor="buyer">구매자</label>
@@ -320,7 +320,7 @@ function SignupPage() {
                 id="seller"
                 name="role"
                 value="seller"
-                checked={formData.role == "seller"}
+                checked={formData.role === "seller"}
                 onChange={handleInputChange}
               />
               <label htmlFor="seller">판매자</label>
