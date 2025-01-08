@@ -45,7 +45,7 @@ function FindUsernamePage() {
       });
 
       // 서버 응답 처리
-      if (response.status == 200) {
+      if (response.status === 200) {
         setUserId(response.data.username); // 서버에서 받은 사용자 아이디
         setErrorMessage(""); // 기존 오류 메시지 초기화
       } else {
@@ -56,7 +56,7 @@ function FindUsernamePage() {
       }
     } catch (error) {
       console.error("아이디 찾기 오류", error);
-      if (error.status == 400) {
+      if (error.status === 400) {
         setErrorMessage("사용자 정보가 존재하지 않습니다");
       } else {
         setErrorMessage("서버 요청 중 오류가 발생했습니다");
