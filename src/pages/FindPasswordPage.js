@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import axios from "axios";
+import axios from "../common/axios.js";
 
 function FindPasswordPage() {
   const navigate = useNavigate();
