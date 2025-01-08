@@ -32,7 +32,7 @@ function FindPasswordPage() {
       const response = await axios.post("open/auth/requestTempPassword", {
         email: formData.email,
       });
-      if (response.status === 200) {
+      if (response.status == 200) {
         alert("임시 비밀번호가 이메일로 발송되었습니다.");
         navigate("/auth");
       } else {

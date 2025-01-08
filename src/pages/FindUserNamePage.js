@@ -45,7 +45,7 @@ function FindUsernamePage() {
       });
 
       // 서버 응답 처리
-      if (response.status === 200) {
+      if (response.status == 200) {
         setUserId(response.data.username); // 서버에서 받은 사용자 아이디
         setErrorMessage(""); // 기존 오류 메시지 초기화
       } else {
