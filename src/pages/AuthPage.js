@@ -1,15 +1,39 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import axios from "../common/axios.js";
+import { useNavigate } from "react-router-dom";
 
 function AuthPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // 로그인 처리 로직 추가 (예: API 호출 등)
-    console.log("로그인 시도:", { username, password });
+    try {
+      const response = await axios.post(
+        "gateway/signin", {
+          username: username,
+          password: password
+        });
+
+      if (response.status === 200) {
+        console.log(response.headers);
+        if (response.headers['accesstoken']) {
+          console.log("token is present");
+          localStorage.setItem('AccessToken', response.headers['accesstoken']);
+        } else {
+          console.log("token is not present");
+        }
+        // navigate("/");
+      } else {
+        alert("로그인에 실패했습니다.");
+      }
+    } catch (error) {
+      console.error("로그인 실패", error);
+    }
   };
 
   return (

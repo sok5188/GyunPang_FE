@@ -39,7 +39,7 @@ function FindUsernamePage() {
 
     try {
       // 서버 요청
-      const response = await axios.post("/api/findUsername", {
+      const response = await axios.post("/open/auth/findUsername", {
         name: formData.name,
         email: formData.email,
       });
