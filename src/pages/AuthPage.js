@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 import axios from "../common/axios.js";
 import { useNavigate } from "react-router-dom";
 
-function AuthPage() {
+function AuthPage({handleLogin}) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -23,11 +23,11 @@ function AuthPage() {
         console.log(response.headers);
         if (response.headers['accesstoken']) {
           console.log("token is present");
-          localStorage.setItem('AccessToken', response.headers['accesstoken']);
+          handleLogin(response.headers['accesstoken']);
+          navigate("/");
         } else {
           console.log("token is not present");
         }
-        // navigate("/");
       } else {
         alert("로그인에 실패했습니다.");
       }
