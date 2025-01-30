@@ -1,27 +1,124 @@
-// HealthPage.js
+import React, { useState, useEffect } from "react";
+import SearchBar from "../component/SearchBar";
+import BannerAd from "../component/BannerAd";
+import TopProducts from "../component/TopProducts";
+import axios from "axios";
+const DefaultPage = ({ token }) => {
+  const [topSellingProducts, setTopSellingProducts] = useState([]);
+  const [topPersonalBoughtProducts, setTopPersonalBoughtProducts] = useState(
+    []
+  );
+  const [topDiscountProducts, setTopDiscountProducts] = useState([]);
 
-import React from 'react';
-import logo from "../logo.svg";
+  const getTopSellingProducts = async () => {
+    try {
+      const response = await axios.get("product/getTopSell");
+      if (response.status === 200) {
+        setTopSellingProducts(response.data.products);
+      } else {
+        console.error("Top selling fail code :", response.status);
+      }
+    } catch (error) {
+      console.error("Top selling fail", error);
+    }
+  };
 
-function DefaultPage() {
-    return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.456456
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React !!
-                </a>
-            </header>
-        </div>
-    );
-}
+  const getTopPersonalBoughtProducts = async () => {
+    try {
+      const response = await axios.get("product/getTopPersonal");
+      if (response.status === 200) {
+        setTopPersonalBoughtProducts(response.data.products);
+      } else {
+        console.error("Top personal fail code :", response.status);
+      }
+    } catch (error) {
+      console.error("Top personal fail", error);
+    }
+  };
+
+  const getTopDiscountProducts = async () => {
+    try {
+      const response = await axios.get("product/getTopDiscount");
+      if (response.status === 200) {
+        setTopDiscountProducts(response.data.products);
+      } else {
+        console.error("Top discount fail code :", response.status);
+      }
+    } catch (error) {
+      console.error("Top discount fail", error);
+    }
+  };
+
+  useEffect(() => {
+    console.log("effect call , token : ", token);
+    // getTopSellingProducts();
+    // getTopPersonalBoughtProducts();
+    // getTopDiscountProducts();
+
+    setTopSellingProducts([
+      {
+        id: 1,
+        image: "https://via.placeholder.com/150",
+        title: "제품 1",
+        price: "10000",
+      },
+      {
+        id: 2,
+        image: "https://via.placeholder.com/150",
+        title: "제품 2",
+        price: "20000",
+      },
+      // 실제 API 데이터를 사용하여 가져오기
+    ]);
+
+    setTopDiscountProducts([
+      {
+        id: 1,
+        image: "https://via.placeholder.com/150",
+        title: "할인 제품 1",
+        price: "15000",
+        discount: 30,
+      },
+      {
+        id: 2,
+        image: "https://via.placeholder.com/150",
+        title: "할인 제품 2",
+        price: "25000",
+        discount: 40,
+      },
+      // 실제 API 데이터를 사용하여 가져오기
+    ]);
+    setTopPersonalBoughtProducts([
+      {
+        id: 1,
+        image: "https://via.placeholder.com/150",
+        title: "자주 구매한 제품 1",
+        price: "30000",
+      },
+      {
+        id: 2,
+        image: "https://via.placeholder.com/150",
+        title: "자주 구매한 제품 2",
+        price: "25000",
+      },
+      // 실제 데이터로 교체
+    ]);
+  }, [token]); // token이 바뀔 때마다 다시 호출
+
+  return (
+    <div>
+      <SearchBar />
+      <BannerAd />
+      <TopProducts products={topSellingProducts} title="오늘 최대 판매" />
+      {token && (
+        <TopProducts
+          products={topPersonalBoughtProducts}
+          title="자주 구매하신 상품"
+        />
+      )}
+      <TopProducts products={topDiscountProducts} title="오늘의 최대 특가" />
+    </div>
+  );
+};
 
 export default DefaultPage;
