@@ -17,22 +17,21 @@ function AuthPage({handleLogin}) {
         "gateway/signin", {
           username: username,
           password: password
-        });
-
-      if (response.status === 200) {
-        console.log(response.headers);
-        if (response.headers['accesstoken']) {
+      });
+      
+      console.log(response.headers);
+        if (response.headers['authorization']) {
           console.log("token is present");
-          handleLogin(response.headers['accesstoken']);
+          handleLogin(response.headers['authorization']);
           navigate("/");
         } else {
           console.log("token is not present");
         }
-      } else {
-        alert("로그인에 실패했습니다.");
-      }
     } catch (error) {
       console.error("로그인 실패", error);
+      if (error.response.status === 400) {
+        alert("아이디 혹은 패스워드를 다시 확인해주세요");
+      }
     }
   };
 
