@@ -7,10 +7,17 @@ import DefaultPage from "./pages/DefaultPage";
 import AuthPage from "./pages/AuthPage";
 import SignupPage from "./pages/SignUpPage";
 import "./css/main.css";
+import "./css/header.css";
+import "./css/order.css";
+import "./css/backbutton.css";
+import "./css/home.css"
 import Header from "./component/Header";
 import FindPasswordPage from "./pages/FindPasswordPage";
 import FindUsernamePage from "./pages/FindUserNamePage";
 import CartPage from "./pages/CartPage";
+import MyInfoPage from "./pages/MyInfoPage";
+import ProductDetailPage from "./pages/ProductDetailPage";
+import OrderPage from "./pages/OrderPage";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("AccessToken"));
@@ -29,6 +36,9 @@ function App() {
     <Router>
       <Header token={token} handleLogout={handleLogout} />
       <Routes>
+        <Route path="/order/:orderId" element={<OrderPage />} />
+        <Route path="/product/:productId" element={<ProductDetailPage />} />
+        <Route path="/my-info" element={<MyInfoPage />} />
         <Route path="/health" element={<HealthPage />} />
         <Route path="/auth" element={<AuthPage handleLogin={handleLogin} />} />
         <Route path="/signup" element={<SignupPage />} />
