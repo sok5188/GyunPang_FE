@@ -12,7 +12,7 @@ const SearchBar = () => {
   return (
     <div className="search-bar">
       <select value={category} onChange={(e) => setCategory(e.target.value)} className="category-dropdown">
-        <option value="">카테고리 선택</option>
+        <option value="">전체</option>
         <option value="electronics">전자기기</option>
         <option value="clothing">의류</option>
         <option value="books">도서</option>

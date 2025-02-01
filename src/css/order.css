@@ -1,0 +1,43 @@
+/* 구매자 및 결제 정보 스타일 */
+.buyer-info, .payment-info {
+  background-color: white;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.buyer-info div, .payment-info div {
+  margin: 5px 0;
+}
+
+.payment-info div {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.payment-info div strong {
+  font-weight: bold;
+}
+
+.order-summary {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.submit-order-button {
+  width: 150px;
+  padding: 10px;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.submit-order-button:hover {
+  background-color: #45a049;
+}
