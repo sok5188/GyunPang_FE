@@ -11,7 +11,7 @@ function ProductCard({ product }) {
     
   return (
     <div className="product-card" onClick={() => handleProductClick(product.id)}>
-      <img src={product.image} alt={product.title} />
+      <img src={product.image} alt={product.title} style={{width: '194px', height: '194px', objectFit: 'cover'}}/>
       <h3>{product.title}</h3>
       <p>{product.price} 원</p>
     </div>
