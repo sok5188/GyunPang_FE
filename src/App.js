@@ -10,7 +10,8 @@ import "./css/main.css";
 import "./css/header.css";
 import "./css/order.css";
 import "./css/backbutton.css";
-import "./css/home.css"
+import "./css/home.css";
+import "./css/cart.css";
 import Header from "./component/Header";
 import FindPasswordPage from "./pages/FindPasswordPage";
 import FindUsernamePage from "./pages/FindUserNamePage";
@@ -18,6 +19,7 @@ import CartPage from "./pages/CartPage";
 import MyInfoPage from "./pages/MyInfoPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import OrderPage from "./pages/OrderPage";
+import SearchResultPage from "./pages/SearchResultPage";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("AccessToken"));
@@ -36,6 +38,7 @@ function App() {
     <Router>
       <Header token={token} handleLogout={handleLogout} />
       <Routes>
+        <Route path="/search" element={<SearchResultPage />} />
         <Route path="/order/:orderId" element={<OrderPage />} />
         <Route path="/product/:productId" element={<ProductDetailPage />} />
         <Route path="/my-info" element={<MyInfoPage />} />

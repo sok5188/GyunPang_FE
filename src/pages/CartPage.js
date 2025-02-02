@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import CartItem from "../component/CartItem"; // 장바구니 상품 항목
 
 const CartPage = () => {
+  const food_pic =
+    "https://storage.googleapis.com/gyunpang_img/images/food_pic.jpg?GoogleAccessId=gyunpang-be@cedar-setup-420206.iam.gserviceaccount.com&Expires=3476843910&Signature=uSlgaf4jvP4mh%2BtH99aRSzrDJgSSkxVmFmJQmfVDXoxRqOzYyQ9Kl%2F3Fxf5QPHD4QIodJZwLqVaTAA0wu2p2Y1dltijLpr58sl3GhjIy%2FbQXBU4nGyhivleQb6UAm1YiXdpCRSlOpdyARAoUK7mH9ST3l%2Fr72DXL4hy%2B1PJuVD2U%2FgVY2fCYPoEN5DQgyRXBD%2FQRdSLWwpfHGHPF5oBqhjclACiJjJ9SZWRoZ27X3JSVaRC75CIKo%2BTWz8xaheb28KXJQYuZzHrUDV8IV52Dbwbzjyr9j4%2Bp988x1BQ10VQr3RMneCGnwOkYitDTwKWHuTLfQU2OXDUyoOMdByjTiw%3D%3D";
   const dummyCartItems = [
     {
       id: 1,
@@ -11,7 +13,7 @@ const CartPage = () => {
       price: 500000,
       quantity: 2,
       discount: 50000, // 예를 들어, 50,000원 할인
-      image: "https://via.placeholder.com/150?text=Smartphone", // 이미지 URL (플레이스홀더 이미지)
+      image: food_pic,
     },
     {
       id: 2,
@@ -19,7 +21,7 @@ const CartPage = () => {
       price: 80000,
       quantity: 1,
       discount: 10000, // 예를 들어, 10,000원 할인
-      image: "https://via.placeholder.com/150?text=Earphone", // 이미지 URL (플레이스홀더 이미지)
+      image: food_pic,
     },
     {
       id: 3,
@@ -27,7 +29,7 @@ const CartPage = () => {
       price: 120000,
       quantity: 1,
       discount: 20000, // 예를 들어, 20,000원 할인
-      image: "https://via.placeholder.com/150?text=Headset", // 이미지 URL (플레이스홀더 이미지)
+      image: food_pic,
     },
   ];
 
@@ -35,25 +37,9 @@ const CartPage = () => {
   const [selectedItems, setSelectedItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalDiscount, setTotalDiscount] = useState(0);
-  const [isAllSelected, setIsAllSelected] = useState(false);
+  const [isCartEmpty, setIsCartEmpty] = useState();
+  const [isSelectAllChecked, setIsSelectAllChecked] = useState(false);
   const navigate = useNavigate();
-
-  // 장바구니 목록 가져오기
-  useEffect(() => {
-    // axios
-    //   .get("/order/cart")
-    //   .then((response) => {
-    //     setCartItems(response.data.items);
-    //     calculateTotal(response.data.items);
-    //   })
-    //   .catch((error) => {
-    //     console.error("장바구니 목록을 불러오는데 실패했습니다.", error);
-    //   });
-
-    // 더미 데이터 사용
-    setCartItems(dummyCartItems);
-    calculateTotal(dummyCartItems);
-  }, []);
 
   // 총 금액 계산
   const calculateTotal = (items) => {
@@ -69,33 +55,30 @@ const CartPage = () => {
 
   // 장바구니 삭제
   const handleRemoveItem = (id) => {
-    axios
-      .delete(`/order/cart/${id}`)
-      .then(() => {
-        setCartItems(cartItems.filter((item) => item.id !== id));
-        calculateTotal(cartItems.filter((item) => item.id !== id));
-      })
-      .catch((error) => {
-        console.error("장바구니 상품 삭제 실패", error);
-      });
+    const updatedItems = cartItems.filter((item) => item.id !== id);
+    setCartItems(updatedItems);
+    setSelectedItems(selectedItems.filter((itemId) => itemId !== id));
+    calculateTotal(updatedItems);
   };
 
   // 수량 변경
   const handleQuantityChange = (id, quantity) => {
-    setCartItems(
-      cartItems.map((item) => (item.id === id ? { ...item, quantity } : item))
+    const updatedItems = cartItems.map((item) =>
+      item.id === id ? { ...item, quantity } : item
     );
-    calculateTotal(cartItems);
+    setCartItems(updatedItems);
+    calculateTotal(updatedItems);
   };
 
   // 전체 선택/해제
-  const handleSelectAll = () => {
-    if (isAllSelected) {
-      setSelectedItems([]);
-    } else {
+  const handleSelectAll = (event) => {
+    const isChecked = event.target.checked;
+    if (isChecked) {
       setSelectedItems(cartItems.map((item) => item.id));
+    } else {
+      setSelectedItems([]);
     }
-    setIsAllSelected(!isAllSelected);
+    setIsSelectAllChecked(isChecked);
   };
 
   // 결제하기
@@ -112,7 +95,7 @@ const CartPage = () => {
 
   // 전체 삭제
   const handleRemoveAll = () => {
-    if (window.confirm("정말 모든 장바구니 목록을 삭제하시겠습니까?")) {
+    if (window.confirm("장바구니에 든 모든 상품을 삭제할까요?")) {
       axios
         .delete("/order/cart/all")
         .then(() => {
@@ -125,8 +108,29 @@ const CartPage = () => {
     }
   };
 
-  // 장바구니가 비었는지 확인
-  const isCartEmpty = cartItems.length === 0;
+  useEffect(() => {
+    // axios
+    //   .get("/order/cart")
+    //   .then((response) => {
+    //     setCartItems(response.data.items);
+    //     calculateTotal(response.data.items);
+    //   })
+    //   .catch((error) => {
+    //     console.error("장바구니 목록을 불러오는데 실패했습니다.", error);
+    //   });
+
+    // 더미 데이터 사용
+    setCartItems(dummyCartItems);
+    setSelectedItems(dummyCartItems.map((item) => item.id));
+    calculateTotal(dummyCartItems);
+  }, []);
+
+  useEffect(() => {
+    setIsCartEmpty(cartItems.length === 0);
+    setIsSelectAllChecked(
+      selectedItems.length > 0 && selectedItems.length === cartItems.length
+    );
+  }, [selectedItems, cartItems]);
 
   return (
     <div className="cart-page">
@@ -139,18 +143,7 @@ const CartPage = () => {
           </button>
         </div>
       ) : (
-        <>
-          {/* 장바구니 항목 리스트 */}
-          <div className="cart-list-header">
-            <input
-              type="checkbox"
-              checked={isAllSelected}
-              onChange={handleSelectAll}
-            />
-            <span>전체 선택</span>
-            <button onClick={handleRemoveAll}>전체 삭제</button>
-          </div>
-
+        <div className="cart-content">
           <div className="cart-list">
             {cartItems.map((item) => (
               <CartItem
@@ -164,6 +157,16 @@ const CartPage = () => {
                 setSelectedItems={setSelectedItems}
               />
             ))}
+            {/* 전체 선택/해제 및 전체 삭제 버튼 */}
+            <div className="cart-actions">
+              <input
+                type="checkbox"
+                checked={isSelectAllChecked}
+                onChange={handleSelectAll}
+              />
+              <span>전체 선택</span>
+              <button onClick={handleRemoveAll}>전체 삭제</button>
+            </div>
           </div>
 
           {/* 장바구니 요약 박스 */}
@@ -175,7 +178,7 @@ const CartPage = () => {
             </div>
             <button onClick={handleCheckout}>결제하기</button>
           </div>
-        </>
+        </div>
       )}
     </div>
   );

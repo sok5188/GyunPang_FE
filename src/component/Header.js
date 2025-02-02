@@ -5,6 +5,9 @@ import "../css/main.css"; // CSS 파일 임포트
 
 const Header = ({ token, handleLogout }) => {
   const [categories, setCategories] = useState([]);
+  const [mainCategories, setMainCategories] = useState([]);
+  const [subCategories, setSubCategories] = useState([]);
+  const [minorCategories, setMinorCategories] = useState([]);
   const [hoveredCategoryId, setHoveredCategoryId] = useState(null); // 현재 hover된 카테고리 ID
   const [isDropdownVisible, setIsDropdownVisible] = useState(false); // 드롭다운 보이기 여부
   const navigate = useNavigate();
@@ -19,22 +22,27 @@ const Header = ({ token, handleLogout }) => {
   };
 
   useEffect(() => {
+    console.log("Header component mounted");
     const mockCategories = [
-      { id: 1, name: "Electronics", subIdList: [11, 12] },
-      { id: 2, name: "Home Appliances", subIdList: [21, 22] },
-      { id: 3, name: "Fashion", subIdList: [31, 32] },
-      { id: 11, name: "Mobile Phones", subIdList: [111, 112] },
-      { id: 12, name: "Laptops", subIdList: [121, 122] },
-      { id: 21, name: "Refrigerators", subIdList: [] },
-      { id: 22, name: "Washing Machines", subIdList: [] },
-      { id: 31, name: "Men", subIdList: [] },
-      { id: 32, name: "Women", subIdList: [] },
-      { id: 111, name: "Smartphones", subIdList: [] },
-      { id: 112, name: "Feature Phones", subIdList: [] },
-      { id: 121, name: "Gaming Laptops", subIdList: [] },
-      { id: 122, name: "Business Laptops", subIdList: [] },
+      { id: 1, name: "Electronics", subIdList: [11, 12], level: 0 },
+      { id: 2, name: "Home Appliances", subIdList: [21, 22], level: 0 },
+      { id: 3, name: "Fashion", subIdList: [31, 32], level: 0 },
+      { id: 11, name: "Mobile Phones", subIdList: [111, 112], level: 1 },
+      { id: 12, name: "Laptops", subIdList: [121, 122], level: 1 },
+      { id: 21, name: "Refrigerators", subIdList: [], level: 1 },
+      { id: 22, name: "Washing Machines", subIdList: [], level: 1 },
+      { id: 31, name: "Men", subIdList: [], level: 1 },
+      { id: 32, name: "Women", subIdList: [], level: 1 },
+      { id: 111, name: "Smartphones", subIdList: [], level: 2 },
+      { id: 112, name: "Feature Phones", subIdList: [], level: 2 },
+      { id: 121, name: "Gaming Laptops", subIdList: [], level: 2 },
+      { id: 122, name: "Business Laptops", subIdList: [], level: 2 },
     ];
     setCategories(mockCategories);
+
+    setMainCategories(mockCategories.filter((cat) => cat.level === 0));
+    // setSubCategories(mockCategories.filter((cat) => cat.level === 1));
+    // setMinorCategories(mockCategories.filter((cat) => cat.level === 2));
 
     // fetchCategories();
   }, []);
@@ -54,10 +62,26 @@ const Header = ({ token, handleLogout }) => {
 
   const handleCategoryHover = (categoryId) => {
     setHoveredCategoryId(categoryId); // hover된 카테고리 ID를 설정
+    console.log("hoveredCategoryId", hoveredCategoryId);
+    const hoveredCategory = categories.find((cat) => cat.id === categoryId);
+    if (hoveredCategory) {
+      if (hoveredCategory.level === 0) {
+        setSubCategories(
+          categories.filter((cat) => hoveredCategory.subIdList.includes(cat.id))
+        );
+        setMinorCategories([]);
+      } else if (hoveredCategory.level === 1) {
+        setMinorCategories(
+          categories.filter((cat) => hoveredCategory.subIdList.includes(cat.id))
+        );
+      }
+    }
   };
 
-  const getSubCategoriesByIds = (subIdList) => {
-    return subIdList.map(id => categories.find(cat => cat.id === id));
+  const handleDropdownMouseLeave = () => {
+    setIsDropdownVisible(false);
+    setMinorCategories([]);
+    setSubCategories([]);
   };
 
   return (
@@ -67,7 +91,7 @@ const Header = ({ token, handleLogout }) => {
         <li
           className="category-dropdown"
           onMouseEnter={() => setIsDropdownVisible(true)} // 마우스를 올리면 드롭다운 열기
-          onMouseLeave={() => setIsDropdownVisible(false)} // 마우스를 내리면 드롭다운 닫기
+          onMouseLeave={() => handleDropdownMouseLeave()} // 마우스를 내리면 드롭다운 닫기
         >
           <button>
             <div className="hamburger-icon">
@@ -79,17 +103,47 @@ const Header = ({ token, handleLogout }) => {
           </button>
 
           {isDropdownVisible && (
-            <div className="category-list">
-              {categories.map((category) => (
-                <CategoryList
-                  key={category.id}
-                  category={category}
-                  hoveredCategoryId={hoveredCategoryId}
-                  onCategoryClick={handleCategoryClick}
-                  onCategoryHover={handleCategoryHover}
-                  getSubCategoriesByIds={getSubCategoriesByIds} // 하위 카테고리 가져오는 함수 전달
-                />
-              ))}
+            <div className="category-container">
+              <div className="category-box">
+                {mainCategories.map((category) => (
+                  <div
+                    key={category.id} // key 속성 추가
+                    className="category-item"
+                    onMouseEnter={() => handleCategoryHover(category.id)} // 마우스를 올리면 하위 카테고리 보이기
+                    onClick={() => handleCategoryClick(category.id)} // 클릭 시 해당 카테고리 검색 페이지로 이동
+                  >
+                    <span>{category.name}</span>
+                  </div>
+                ))}
+              </div>
+              {subCategories.length > 0 && (
+                <div className="category-box">
+                  {subCategories.map((category) => (
+                    <div
+                      key={category.id} // key 속성 추가
+                      className="category-item"
+                      onMouseEnter={() => handleCategoryHover(category.id)} // 마우스를 올리면 하위 카테고리 보이기
+                      onClick={() => handleCategoryClick(category.id)} // 클릭 시 해당 카테고리 검색 페이지로 이동
+                    >
+                      <span>{category.name}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {minorCategories.length > 0 && (
+                <div className="category-box">
+                  {minorCategories.map((category) => (
+                    <div
+                      key={category.id} // key 속성 추가
+                      className="category-item"
+                      onMouseEnter={() => handleCategoryHover(category.id)} // 마우스를 올리면 하위 카테고리 보이기
+                      onClick={() => handleCategoryClick(category.id)} // 클릭 시 해당 카테고리 검색 페이지로 이동
+                    >
+                      <span>{category.name}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           )}
         </li>
@@ -126,53 +180,6 @@ const Header = ({ token, handleLogout }) => {
         </ul>
       </nav>
     </header>
-  );
-};
-
-const CategoryList = ({
-  category,
-  hoveredCategoryId,
-  onCategoryClick,
-  onCategoryHover,
-  getSubCategoriesByIds,
-}) => {
-  // 하위 카테고리 ID들을 가져와서 실제 객체로 변환
-  const subCategories = getSubCategoriesByIds(category.subIdList);
-
-  return (
-    <div
-      className="category-item"
-      onMouseEnter={() => onCategoryHover(category.id)} // 마우스를 올리면 하위 카테고리 보이기
-      onClick={() => onCategoryClick(category.id)} // 클릭 시 해당 카테고리 검색 페이지로 이동
-    >
-      <span>{category.name}</span>
-
-      {/* 하위 카테고리들 표시 */}
-      {subCategories.length > 0 && category.id === hoveredCategoryId && (
-        <div className="subcategory-list">
-          {subCategories.map((subCategory) => (
-            <div
-              key={subCategory.id}
-              className="subcategory-item"
-              onClick={() => onCategoryClick(subCategory.id)}
-            >
-              {subCategory.name}
-
-              {/* 하위 카테고리가 더 있는 경우 재귀적으로 표시 */}
-              {subCategory.subIdList && subCategory.subIdList.length > 0 && (
-                <CategoryList
-                  category={subCategory}
-                  hoveredCategoryId={hoveredCategoryId}
-                  onCategoryClick={onCategoryClick}
-                  onCategoryHover={onCategoryHover}
-                  getSubCategoriesByIds={getSubCategoriesByIds}
-                />
-              )}
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
   );
 };
 
