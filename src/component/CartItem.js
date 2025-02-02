@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const CartItem = ({
   item,
@@ -8,7 +8,11 @@ const CartItem = ({
   setSelectedItems,
 }) => {
   const [quantity, setQuantity] = useState(item.quantity);
-  const [isSelected, setIsSelected] = useState(true);
+  const [isSelected, setIsSelected] = useState(selectedItems.includes(item.id));
+
+  useEffect(() => {
+    setIsSelected(selectedItems.includes(item.id));
+  }, [selectedItems, item.id]);
 
   // 수량 변경 핸들러
   const handleQuantityChange = (change) => {
@@ -21,12 +25,12 @@ const CartItem = ({
 
   // 체크박스 선택/해제 핸들러
   const handleSelectChange = () => {
-    setIsSelected(!isSelected);
     if (isSelected) {
-      setSelectedItems((prev) => [...prev, item.id]);
-    } else {
       setSelectedItems((prev) => prev.filter((id) => id !== item.id));
+    } else {
+      setSelectedItems((prev) => [...prev, item.id]);
     }
+    setIsSelected(!isSelected);
   };
 
   return (
@@ -39,18 +43,24 @@ const CartItem = ({
       />
       <img src={item.image} alt={item.name} className="cart-item-image" />
       <div className="cart-item-details">
-        <div className="cart-item-name">{item.name}</div>
-        <div className="cart-item-price">{item.price} 원</div>
-        <div className="cart-item-quantity">
-          <button onClick={() => handleQuantityChange(-1)}>-</button>
-          <span>{quantity}</span>
-          <button onClick={() => handleQuantityChange(1)}>+</button>
+        <div className="cart-item-header">
+          <div className="cart-item-name">{item.name}</div>
+          <button className="cart-item-remove" onClick={onRemove}>
+            🗑️
+          </button>
         </div>
-        <div className="cart-item-total-price">{item.price * quantity} 원</div>
+        <div className="cart-item-price">{item.price} 원</div>
+        <div className="cart-item-footer">
+          <div className="cart-item-quantity">
+            <button onClick={() => handleQuantityChange(-1)}>-</button>
+            <span>{quantity}</span>
+            <button onClick={() => handleQuantityChange(1)}>+</button>
+          </div>
+          <div className="cart-item-total-price">
+            {item.price * quantity} 원
+          </div>
+        </div>
       </div>
-      <button className="cart-item-remove" onClick={onRemove}>
-        🗑️
-      </button>
     </div>
   );
 };
