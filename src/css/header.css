@@ -39,6 +39,7 @@ header nav ul li {
   align-items: center;
 }
 
+/* 카테고리 드롭다운 버튼 스타일 */
 .category-dropdown button {
   display: flex;
   align-items: center;
@@ -49,47 +50,28 @@ header nav ul li {
   cursor: pointer;
 }
 
-.category-dropdown .category-list {
+/* 카테고리 드롭다운 컨테이너 스타일 */
+.category-container {
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: white;
-  border: 1px solid #ddd;
-  padding: 10px;
   display: flex;
-  flex-direction: column;
-  z-index: 10;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  min-width: 200px;
+  flex-direction: row; /* 가로로 배치 */
+  flex-wrap: nowrap; /* 줄 바꿈 방지 */
+  justify-content: space-between;
+  align-items: stretch; /* 자식 요소의 높이를 부모 요소에 맞춤 */
 }
 
-.category-item, .subcategory-item {
+.category-item {
   padding: 10px;
   cursor: pointer;
   color: #888; /* 기본 텍스트 색상 */
   transition: color 0.3s ease; /* 색상 변화에 부드러운 전환 효과 추가 */
 }
 
-.category-item:hover, .subcategory-item:hover {
+.category-item:hover {
   background-color: #f0f0f0;
   color: #4caf50;
-}
-
-.subcategory-list {
-  display: none;
-  position: absolute;
-  left: 100%;
-  top: 0;
-  background-color: white;
-  border: 1px solid #ddd;
-  padding: 10px;
-  min-width: 200px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 10;
-}
-
-.category-item:hover .subcategory-list {
-  display: block;
 }
 
 /* 햄버거 아이콘 */
@@ -106,4 +88,17 @@ header nav ul li {
   height: 3px;
   background-color: #fff;
   width: 100%;
+}
+
+.category-box {
+  display: flex;
+  flex-direction: column; /* 세로로 배치 */
+  gap: 10px; /* 각 항목 사이에 간격 */
+  padding: 10px; /* 내부 여백 */
+  border: 1px solid #ddd; /* 테두리 추가 */
+  background-color: #fff; /* 배경색 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  flex: 1; /* 각 박스가 동일한 너비를 가지도록 설정 */
+  min-height: 200px; /* 최소 높이 설정 */
+  overflow-y: auto; /* 내용이 넘칠 경우 스크롤 가능 */
 }
