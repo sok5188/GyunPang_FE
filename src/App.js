@@ -12,6 +12,8 @@ import "./css/order.css";
 import "./css/backbutton.css";
 import "./css/home.css";
 import "./css/cart.css";
+import "./css/myinfo.css";
+import "./css/auth.css";
 import Header from "./component/Header";
 import FindPasswordPage from "./pages/FindPasswordPage";
 import FindUsernamePage from "./pages/FindUserNamePage";

@@ -1,0 +1,65 @@
+.input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.input-wrapper input {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.fit-btn {
+  white-space: nowrap;
+  width: auto;
+}
+
+.links {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.link {
+  color: #4caf50;
+  text-decoration: none;
+  font-size: 14px;
+  margin: 0 10px;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.role-select {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.role-option {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.role-option label {
+  margin-left: 5px;
+  white-space: nowrap;
+}

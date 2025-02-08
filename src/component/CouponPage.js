@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 function CouponPage() {
-  const [coupon, setCoupon] = useState('');
+  const [coupon, setCoupon] = useState("");
   const coupons = [
-    { name: '10% 할인', discount: '10%', validUntil: '2023-12-31' },
-    { name: '5,000원 할인', discount: '5000원', validUntil: '2023-06-30' }
+    { name: "10% 할인", discount: "10%", validUntil: "2023-12-31" },
+    { name: "5,000원 할인", discount: "5000원", validUntil: "2023-06-30" },
   ];
 
   const handleCouponSubmit = (e) => {
@@ -15,17 +15,17 @@ function CouponPage() {
 
   return (
     <div className="coupons-page">
-      <form onSubmit={handleCouponSubmit}>
-        <input 
-          type="text" 
-          value={coupon} 
-          onChange={(e) => setCoupon(e.target.value)} 
+      <form className="coupon-form" onSubmit={handleCouponSubmit}>
+        <input
+          type="text"
+          value={coupon}
+          onChange={(e) => setCoupon(e.target.value)}
           placeholder="쿠폰 코드 입력"
         />
         <button type="submit">쿠폰 적용</button>
       </form>
 
-      <table>
+      <table className="coupons-table">
         <thead>
           <tr>
             <th>쿠폰명</th>

@@ -161,6 +161,7 @@ function SignupPage() {
               />
               <button
                 type="button"
+                className="fit-btn"
                 onClick={checkUsernameAvailability}
                 disabled={!formData.username || isUsernameConfirmed}>
                 중복 확인
@@ -212,6 +213,7 @@ function SignupPage() {
               />
               <button
                 type="button"
+                className="fit-btn"
                 onClick={handleEmailVerification}
                 disabled={
                   !formData.email ||
@@ -306,24 +308,28 @@ function SignupPage() {
           <div className="input-group">
             <label>가입 유형</label>
             <div className="role-select">
-              <input
-                type="radio"
-                id="buyer"
-                name="role"
-                value="buyer"
-                checked={formData.role === "buyer"}
-                onChange={handleInputChange}
-              />
-              <label htmlFor="buyer">구매자</label>
-              <input
-                type="radio"
-                id="seller"
-                name="role"
-                value="seller"
-                checked={formData.role === "seller"}
-                onChange={handleInputChange}
-              />
-              <label htmlFor="seller">판매자</label>
+              <div className="role-option">
+                <input
+                  type="radio"
+                  id="buyer"
+                  name="role"
+                  value="buyer"
+                  checked={formData.role === "buyer"}
+                  onChange={handleInputChange}
+                />
+                <label htmlFor="buyer">구매자</label>
+              </div>
+              <div className="role-option">
+                <input
+                  type="radio"
+                  id="seller"
+                  name="role"
+                  value="seller"
+                  checked={formData.role === "seller"}
+                  onChange={handleInputChange}
+                />
+                <label htmlFor="seller">판매자</label>
+              </div>
             </div>
           </div>
 
