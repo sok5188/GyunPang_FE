@@ -1,0 +1,474 @@
+.my-info-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: row; /* Change to row for horizontal alignment */
+  height: 100%; /* 화면 높이의 90%로 설정 */
+}
+
+.menu-bar {
+  width: 200px;
+  margin-right: 20px;
+}
+
+.menu-bar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.menu-bar li {
+  cursor: pointer;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  margin-bottom: 10px;
+}
+
+.menu-bar li.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.menu-bar li:hover {
+  background-color: #f0f0f0;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  height: 80vh; /* 화면 높이의 80%로 설정 */
+  overflow-y: auto; /* 내부 요소가 넘칠 경우 스크롤 가능 */
+}
+
+/* OrderInfoPage 스타일 추가 */
+.orders-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.order-item {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.order-products {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.order-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.order-actions button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.order-actions button:hover {
+  background-color: #0056b3;
+}
+
+/* 새로운 클래스 추가 */
+.container-90vh {
+  height: 90vh; /* 화면 높이의 90%로 설정 */
+}
+
+/* Divider 스타일 추가 */
+.divider {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 10px 0;
+}
+
+/* OrderItem 스타일 추가 */
+.order-item-container {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.order-item-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-right: 20px;
+}
+
+.order-item-details {
+  flex-grow: 1;
+}
+
+.order-item-title {
+  font-size: 18px;
+  margin: 0;
+}
+
+.order-item-price {
+  font-size: 16px;
+  color: #333;
+}
+
+.order-item-discount {
+  color: #ff0000;
+  margin-left: 10px;
+}
+
+.order-item-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* InquiryItem 스타일 추가 */
+.inquiries-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.inquiry-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  position: relative;
+}
+
+.inquiry-item img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.inquiry-item-details {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 10px;
+}
+
+.inquiry-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.inquiry-item-title {
+  font-size: 20px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.inquiry-item-price {
+  font-size: 16px;
+  color: #888;
+  white-space: nowrap;
+}
+
+.inquiry-item-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.inquiry-item-status {
+  font-size: 14px;
+  color: #555;
+}
+
+.inquiry-item-last-reply {
+  font-size: 12px;
+  color: #aaa;
+}
+
+/* CouponsPage 스타일 추가 */
+.coupons-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.coupon-form {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.coupon-form input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.coupon-form button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: auto; /* 버튼 폭을 자동으로 설정 */
+  min-width: 100px; /* 버튼의 최소 폭을 설정 */
+}
+
+.coupon-form button:hover {
+  background-color: #0056b3;
+}
+
+.coupons-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.coupons-table th,
+.coupons-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+.coupons-table th {
+  background-color: #f0f0f0;
+}
+
+/* ReviewItem 스타일 추가 */
+.reviews-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.review-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  position: relative;
+}
+
+.review-item img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.review-item-details {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 10px;
+}
+
+.review-item-title {
+  font-size: 20px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.review-item-price {
+  font-size: 16px;
+  color: #888;
+  white-space: nowrap;
+}
+
+.review-item-rating {
+  display: flex;
+  gap: 5px;
+}
+
+.stars {
+  display: flex;
+}
+
+.star {
+  font-size: 20px;
+  color: #e4e5e9;
+}
+
+.star.filled {
+  color: #ffc107;
+}
+
+.review-item-status {
+  font-size: 14px;
+  color: #555;
+}
+
+.review-item-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.review-item-button:hover {
+  background-color: #0056b3;
+}
+
+/* 비밀번호 입력 화면 스타일 추가 */
+.password-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 75%; /* 화면 전체 높이 */
+}
+
+.password-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 300px;
+  margin: auto; /* 화면 중앙에 위치하도록 설정 */
+}
+
+.password-input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.password-button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.password-button:hover {
+  background-color: #0056b3;
+}
+
+/* InfoEditPage 스타일 추가 */
+.info-edit-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 가운데 정렬 */
+  gap: 20px;
+  padding: 20px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 좌우 정렬 */
+  gap: 10px;
+  width: 100%;
+  max-width: 600px; /* 최대 너비 설정 */
+}
+
+.info-label {
+  font-size: 18px;
+  width: 120px; /* 고정 너비 설정 */
+}
+
+.info-input {
+  padding: 5px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  flex-grow: 1; /* 남은 공간을 차지하도록 설정 */
+}
+
+.info-value {
+  font-size: 16px;
+  flex-grow: 1; /* 남은 공간을 차지하도록 설정 */
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.info-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+.info-button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 14px; /* 버튼 글꼴 크기 조정 */
+  width: auto; /* 버튼 폭을 내용에 맞게 자동으로 설정 */
+}
+
+.info-button:hover {
+  background-color: #0056b3;
+}
+
+.save-all-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #28a745;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 16px;
+}
+
+.save-all-button:hover {
+  background-color: #218838;
+}
+
+.password-check-message {
+  margin-top: 5px;
+}
+
+.password-match {
+  color: #28a745;
+}
+
+.password-mismatch {
+  color: #dc3545;
+}

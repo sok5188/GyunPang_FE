@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 import axios from "../common/axios.js";
 import { useNavigate } from "react-router-dom";
 
-function AuthPage({handleLogin}) {
+function AuthPage({ handleLogin }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -13,20 +13,19 @@ function AuthPage({handleLogin}) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "gateway/signin", {
-          username: username,
-          password: password
+      const response = await axios.post("gateway/signin", {
+        username: username,
+        password: password,
       });
-      
+
       console.log(response.headers);
-        if (response.headers['authorization']) {
-          console.log("token is present");
-          handleLogin(response.headers['authorization']);
-          navigate("/");
-        } else {
-          console.log("token is not present");
-        }
+      if (response.headers["authorization"]) {
+        console.log("token is present");
+        handleLogin(response.headers["authorization"]);
+        navigate("/");
+      } else {
+        console.log("token is not present");
+      }
     } catch (error) {
       console.error("로그인 실패", error);
       if (error.response.status === 400) {
@@ -69,14 +68,14 @@ function AuthPage({handleLogin}) {
         </form>
 
         <div className="links">
-          <Link to="/find-username">
-            <button className="link-btn">아이디 찾기</button>
+          <Link to="/find-username" className="link">
+            아이디 찾기
           </Link>
-          <Link to="/find-password">
-            <button className="link-btn">비밀번호 찾기</button>
+          <Link to="/find-password" className="link">
+            비밀번호 찾기
           </Link>
-          <Link to="/signup">
-            <button className="link-btn">회원가입</button>
+          <Link to="/signup" className="link">
+            회원가입
           </Link>
         </div>
       </div>

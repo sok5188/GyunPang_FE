@@ -46,7 +46,8 @@ button:disabled {
 }
 
 /* 입력 필드 스타일 */
-.label, .input-group label {
+.label,
+.input-group label {
   font-size: 14px;
   color: #333;
   margin-bottom: 8px;
@@ -78,4 +79,16 @@ a {
 a:hover {
   color: #f39c12;
   text-decoration: underline;
+}
+
+.success-text {
+  color: #4caf50;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.error-text {
+  color: #f44336;
+  font-size: 14px;
+  margin-top: 8px;
 }
