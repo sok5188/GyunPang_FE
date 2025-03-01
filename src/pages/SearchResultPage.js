@@ -1,5 +1,5 @@
-import SearchBar from "../component/SearchBar";
-import ProductCard from "../component/ProductCard";
+import SearchBar from "../components/SearchBar";
+import ProductCard from "../components/ProductCard";
 import { useLocation } from "react-router-dom";
 
 const SearchResultPage = () => {

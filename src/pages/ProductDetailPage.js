@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import ProductImageGallery from '../component/ProductImageGallery';
-import ProductInfo from '../component/ProductInfo';
-import ProductTabs from '../component/ProductTabs'; 
-import Reviews from '../component/Review';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import ProductImageGallery from "../components/ProductImageGallery";
+import ProductInfo from "../components/ProductInfo";
+import ProductTabs from "../components/ProductTabs";
+import Reviews from "../components/Review";
 
 function ProductDetailPage() {
-    const { productId } = useParams();  // URL에서 productId를 추출
+  const { productId } = useParams(); // URL에서 productId를 추출
   const [product, setProduct] = useState(null);
 
   // 상품 데이터 로딩 (여기서는 예시로 mock 데이터 사용)
@@ -14,14 +14,14 @@ function ProductDetailPage() {
     // API 호출 또는 로컬 데이터 로딩
     const fetchedProduct = {
       id: productId,
-      name: '상품명',
-      images: ['image1.jpg', 'image2.jpg', 'image3.jpg'],
+      name: "상품명",
+      images: ["image1.jpg", "image2.jpg", "image3.jpg"],
       price: 50000,
       originalPrice: 70000,
       rating: 4.5,
       reviewCount: 120,
-      seller: '판매자명',
-      description: '상품 상세 설명',
+      seller: "판매자명",
+      description: "상품 상세 설명",
     };
     setProduct(fetchedProduct);
   }, [productId]);
