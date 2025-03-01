@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import CouponPage from "../component/CouponPage"; // 쿠폰 목록
-import InquiryPage from "../component/InquiryPage"; // 문의 목록
-import ReviewPage from "../component/ReviewPage"; // 리뷰 목록
-import InfoEditPage from "../component/InfoEditPage"; // 정보 수정
-import OrderInfoPage from "../component/OrderInfoPage";
+import CouponPage from "../components/CouponPage"; // 쿠폰 목록
+import InquiryPage from "../components/InquiryPage"; // 문의 목록
+import ReviewPage from "../components/ReviewPage"; // 리뷰 목록
+import InfoEditPage from "../components/InfoEditPage"; // 정보 수정
+import OrderInfoPage from "../components/OrderInfoPage";
 
 function MyInfoPage() {
   const [selectedMenu, setSelectedMenu] = useState("orders"); // 기본적으로 주문 내역 선택

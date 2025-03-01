@@ -1,7 +1,12 @@
 // App.js
 
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 import HealthPage from "./pages/HealthPage";
 import DefaultPage from "./pages/DefaultPage";
 import AuthPage from "./pages/AuthPage";
@@ -14,8 +19,9 @@ import "./css/home.css";
 import "./css/cart.css";
 import "./css/myinfo.css";
 import "./css/auth.css";
-import Header from "./component/Header";
-import SellerHeader from "./component/SellerHeader";
+import "./css/seller.css";
+import Header from "./components/Header";
+import SellerHeader from "./components/SellerHeader";
 import FindPasswordPage from "./pages/FindPasswordPage";
 import FindUsernamePage from "./pages/FindUserNamePage";
 import CartPage from "./pages/CartPage";
@@ -27,6 +33,10 @@ import SellerProductsPage from "./pages/SellerProductsPage";
 import SellerCouponsPage from "./pages/SellerCouponsPage";
 import SellerReviewsPage from "./pages/SellerReviewsPage";
 import SellerInquiriesPage from "./pages/SellerInquiriesPage";
+
+function PrivateRoute({ element, isSeller }) {
+  return isSeller ? element : <Navigate to="/" />;
+}
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("AccessToken"));
@@ -77,10 +87,37 @@ function App() {
         <Route path="/find-password" element={<FindPasswordPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/" element={<DefaultPage token={token} />} />
-        <Route path="/seller/products" element={<SellerProductsPage />} />
-        <Route path="/seller/coupons" element={<SellerCouponsPage />} />
-        <Route path="/seller/reviews" element={<SellerReviewsPage />} />
-        <Route path="/seller/inquiries" element={<SellerInquiriesPage />} />
+        <Route
+          path="/seller/products"
+          element={
+            <PrivateRoute
+              element={<SellerProductsPage />}
+              isSeller={isSeller}
+            />
+          }
+        />
+        <Route
+          path="/seller/coupons"
+          element={
+            <PrivateRoute element={<SellerCouponsPage />} isSeller={isSeller} />
+          }
+        />
+        <Route
+          path="/seller/reviews"
+          element={
+            <PrivateRoute element={<SellerReviewsPage />} isSeller={isSeller} />
+          }
+        />
+        <Route
+          path="/seller/inquiries"
+          element={
+            <PrivateRoute
+              element={<SellerInquiriesPage />}
+              isSeller={isSeller}
+            />
+          }
+        />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
   );

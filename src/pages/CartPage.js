@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import CartItem from "../component/CartItem"; // 장바구니 상품 항목
+import CartItem from "../components/CartItem"; // 장바구니 상품 항목
 
 const CartPage = () => {
   const food_pic =
